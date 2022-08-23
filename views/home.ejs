@@ -1,0 +1,18 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+<link rel="stylesheet" href="/app.css">
+
+<div class="flex-container">
+  <div class="container">
+    <h1>JOIN US</h1>
+	  <p>Currently Enrolled: <%= count %></p>
+    <form method="POST" action='/register'>
+		<input type="text" name="name" class="form" placeholder="Full Name">
+		<input type="int" name="age" class="form" placeholder="Age">
+		<div class="form-field">
+			<input type="checkbox" id="perm" name="permission" class="form" defaultValue="true">
+			<label for="perm">Student?</label>
+		</div>
+		<button>Join Now</button>
+    </form>
+  </div>
+</div>
