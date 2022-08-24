@@ -52,14 +52,16 @@ connection.query(courseQuery, [data], (err, result)=>{
 data = [];
 
 // Generate [peopleCount] different entries representing a person
+var teacherFill = 0
 for(i=1; i<=peopleCount; i++){
 	var gender = faker.name.gender();
-	if(Math.random()>.94){
+	if(teacherFill<certCount){
 		data.push([
 			faker.name.prefix(gender)+" "+faker.name.firstName(gender)+" "+faker.name.lastName(gender),
 			faker.finance.amount(26, 80, 0),
 			false
 		]);
+		teacherFill ++;
 	}else{
 		data.push([
 			faker.name.firstName()+" "+faker.name.lastName(),
@@ -74,15 +76,25 @@ connection.query(personQuery, [data], (err, result)=>{
 	console.log(result);
 }); // empty data, we using it again
 data = [];
+teacherFill = 0;
 
 // ok, now lets put our people into their classes;
 // had an idea here, to fill courses in a cert until random decides to move to the next person, maybe later;
 for(i=1; i<=peopleCount; i++){
-	data.push([
-		i,
-		Math.ceil(Math.random()*(certCount*courseCount)),
-		Math.floor(Math.random()*2)
-	])
+	if(teacherFill<certCount){
+		data.push([
+			i,
+			i*courseCount,
+			1
+		])
+		teacherFill++;
+	}else{
+		data.push([
+			i,
+			Math.ceil(Math.random()*(certCount*courseCount)),
+			Math.floor(Math.random()*2)
+		])
+	}
 } //shove the relations into the relation table in our database
 var relateQuery = "INSERT INTO relation (person_id, course_id, course_clear) VALUES ?";
 connection.query(relateQuery, [data], (err, result)=>{
