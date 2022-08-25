@@ -43,7 +43,40 @@ ORDER BY person.name;
 ####################################################################
 
 
+###################################################################
+# Single query that gives all requested information about courses #
+###################################################################
+SELECT
+    name AS Course_Name,
+    id AS Course_Id,
+    SUBSTRING(description,1,30) AS Description,
+    num AS Course_Number
+FROM course;
+###################################################################
+# Single query that gives all requested information about courses #
+###################################################################
 
+
+#########################################################################
+# Single query that gives all requested information about certification #
+#########################################################################
+# A messy solution that doesn't give meaningful data, sort with JS      #
+#########################################################################
+SELECT 
+	certificate.name AS certName,
+    certificate.id AS certId,
+    course.id AS courseId,
+    person.id AS stuId,
+    person.name AS stuName,
+    relation.course_clear AS courseComplete
+FROM relation JOIN person ON person.id = relation.person_id
+JOIN course ON course.id = relation.course_id
+JOIN certificate ON certificate.id = course.cert_id
+ORDER BY courseId;
+#########################################################################
+# Single query that gives all requested information about certification #
+#########################################################################
+    
 
 SELECT
     certificate.name AS Major,
