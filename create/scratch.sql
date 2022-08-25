@@ -49,7 +49,7 @@ ORDER BY person.name;
 SELECT
     name AS Course_Name,
     id AS Course_Id,
-    SUBSTRING(description,1,30) AS Description,
+    description AS Description,
     num AS Course_Number
 FROM course;
 ###################################################################
