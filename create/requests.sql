@@ -76,11 +76,3 @@ ORDER BY courseId;
 #########################################################################
 # Single query that gives all requested information about certification #
 #########################################################################
-    
-
-SELECT
-    certificate.name AS Major,
-    COUNT(course.id) AS Course_Count
-FROM certificate
-    JOIN course ON course.cert_id = certificate.id
-GROUP BY certificate.name;
